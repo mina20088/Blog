@@ -1,0 +1,11 @@
+.navbar{
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+}
+#InsertPostHeader{
+    background-image: linear-gradient(to right,green,yellow) ;
+    text-align: center;
+    color: white;
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+}
