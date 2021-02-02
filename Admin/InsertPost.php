@@ -25,7 +25,7 @@
         <div class="row mb-3">
             <label for="Category" class="col-sm-2 col-form-label" style="font-weight: bold">Category</label>
             <div class="col-sm-10">
-                <select id="Category" class="form-select" name="Category" aria-label="Default select example">
+                <select id="Category" class="form-select" name = 'Category[]' multiple size="2">
                     <option value="-1" selected>Please Choose a Category</option>
                     <option value="1">Bootstrap</option>
                     <option value="2">JavaScript</option>

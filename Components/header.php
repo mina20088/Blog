@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Post Insert</title>
-    <link rel="stylesheet" href="../../Blog/css/bootstrap.css">
-    <link rel="stylesheet" href="../../Blog/css/MainCss.css">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/MainCss.css">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light">
