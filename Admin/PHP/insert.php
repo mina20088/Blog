@@ -5,24 +5,31 @@ $SEO = $_POST['SEO-Title'];
 $Category = $_POST['Category'];
 $Content = $_POST['Content'];
 $author = $_POST['Author'];
-
-if(isset($_POST['insert'])){
-    if(empty($Title)||empty($SEO)||$Content == "") {
-        echo "Items Cant Be Empty";
-    }else if($Category == -1){
-        echo "Please Choose Category";
-    }else{
+$QueryString = "";
+if(isset($_POST['insert']))
+{
+    if(empty($Title)||empty($SEO)||$Content == "")
+    {
+        $QueryString .= "Items Cant Be Empty";
+    }
+    else {
         $Connection = new mysqli("localhost",'root','22058149','Blog');
         if($Connection->connect_errno){
-            echo "Cant Access The Database" . $Connection->connect_errno . " " . $Connection->connect_error;
+            $QueryString .= "Cant Access The Database" . $Connection->connect_errno . " " . $Connection->connect_error;
         }
-        if($Statement = $Connection->prepare( "insert into posts(title,seo_title,content,author) values (?,?,?,?)"))
-        {
-            if($Statement->bind_param('sssi',$Title,$SEO,$Content,$author))
-            {
-                if($Statement->execute())
+        foreach ($Category as $Cat){
+            if($Cat == -1){
+                $QueryString .= "Please Choose A Category";
+            }else{
+                if($Statement = $Connection->prepare( "insert into posts(title,seo_title,content,author) values (?,?,?,?)"))
                 {
-                    echo "Row Inserted" . $Statement->affected_rows;
+                    if($Statement->bind_param('sssi',$Title,$SEO,$Content,$author))
+                    {
+                        if($Statement->execute())
+                        {
+                            $QueryString .= "Row Inserted" . $Statement->affected_rows;
+                        }
+                    }
                 }
             }
         }
@@ -31,22 +38,26 @@ if(isset($_POST['insert'])){
                 $post_Id = $Result['id'];
                 foreach ($Category as $Cat){
                     if($Cat == -1){
-                        echo "Not Inserted";
+                        $QueryString .= "Not Inserted";
                     }else{
                         if($Statement= $Connection->prepare('insert into has_category values (?,?)')){
                             if($Statement->bind_param('ii',$post_Id,$Cat)){
                                 if($Statement->execute()){
-                                    echo "Row Inserted" . $Statement->affected_rows;
+
                                 }
                             }
                         }
                     }
                 }
             }
-            $Statement->close();
-        }else{
+        }
+        else{
             echo $Connection->error;
         }
         $Connection->close();
     }
+}
+
+if(isset($QueryString)){
+    header("location:http://localhost/Admin/InsertPost.php?quary=$QueryString");
 }

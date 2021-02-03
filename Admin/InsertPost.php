@@ -7,6 +7,18 @@
         </div>
     </div>
 </div>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <?php if(isset($_GET['quary'])):?>
+                <div class="alert alert-primary" role="alert">
+                   <p><?php echo $_GET['quary']?></p>
+                </div>
+            <?php endif;?>
+        </div>
+    </div>
+
+</div>
 <div class="container mt-5">
     <form action="PHP/insert.php" method="post">
         <input type="hidden"  name="Author" value="1">
