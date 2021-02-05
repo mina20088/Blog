@@ -1,4 +1,13 @@
-
+<?php
+$ErrorArray = null;
+$SuccessArray = null;
+    if(isset($_GET['Query'])){
+        $ErrorArray = explode(",",$_GET['Query']);
+    }
+    if(isset($_GET['Successs'])){
+        $SuccessArray = explode(',',$_GET['Successs']);
+    }
+?>
 <?php include "../Components/header.php"?>
 <div class="container-fluid" id="InsertPostHeader">
     <div class="row">
@@ -10,11 +19,24 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <?php if(isset($_GET['quary'])):?>
-                <div class="alert alert-primary" role="alert">
-                   <p><?php echo $_GET['quary']?></p>
+            <?php if(isset($ErrorArray)):?>
+                <div class="alert alert-danger" role="alert">
+                    <ul>
+                        <?php foreach ($ErrorArray as $Err):?>
+                             <li><?php echo $Err ?></li>
+                        <?php endforeach;?>
+                    </ul>
                 </div>
-            <?php endif;?>
+            <?php endif; ?>
+            <?php if(isset($SuccessArray)):?>
+                <div class="alert alert-danger" role="alert">
+                    <ul>
+                        <?php foreach ($SuccessArray as $Suss):?>
+                            <li><?php echo $Suss ?></li>
+                        <?php endforeach;?>
+                    </ul>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 
@@ -37,10 +59,10 @@
         <div class="row mb-3">
             <label for="Category" class="col-sm-2 col-form-label" style="font-weight: bold">Category</label>
             <div class="col-sm-10">
-                <select id="Category" class="form-select" name = 'Category[]' multiple size="2">
-                    <option value="-1" selected>Please Choose a Category</option>
-                    <option value="1">Bootstrap</option>
-                    <option value="2">JavaScript</option>
+                <select id="Category" class="form-select" name = 'Category[]' multiple size="3">
+                    <option value = "-1" selected>Please Choose a Category</option>
+                    <option value = "1" >Bootstrap</option>
+                    <option value = "2" >JavaScript</option>
                 </select>
             </div>
         </div>
