@@ -1,4 +1,5 @@
 <?php
+include '../Admin/PHP/getCategory.php';
 $ErrorArray = null;
 $SuccessArray = null;
     if(isset($_GET['Query'])){
@@ -7,6 +8,7 @@ $SuccessArray = null;
     if(isset($_GET['Successs'])){
         $SuccessArray = explode(',',$_GET['Successs']);
     }
+
 ?>
 <?php include "../Components/header.php"?>
 <div class="container-fluid" id="InsertPostHeader">
@@ -59,11 +61,15 @@ $SuccessArray = null;
         <div class="row mb-3">
             <label for="Category" class="col-sm-2 col-form-label" style="font-weight: bold">Category</label>
             <div class="col-sm-10">
-                <select id="Category" class="form-select" name = 'Category[]' multiple size="3">
+                <?php if(isset($Category)):?>
+                <select id="Category" class="form-select" name = 'Category[]' multiple size="<?php echo count($Category)+1?>">
                     <option value = "-1" selected>Please Choose a Category</option>
-                    <option value = "1" >Bootstrap</option>
-                    <option value = "2" >JavaScript</option>
+                    <?php foreach ($Category as $key=>$value):?>
+                        <option value = "<?php echo $key?>"><?php echo $value?></option>
+                    <?php endforeach;?>
+                    </select>
                 </select>
+                <?php endif;?>
             </div>
         </div>
         <div class="row mb-3">
