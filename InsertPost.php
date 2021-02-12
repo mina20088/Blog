@@ -1,7 +1,6 @@
-<?php include "Config/Config.php";?>
-<?php include "Class/Category.php";?>
-<?php include 'Class/DatabaseClass/Database.php';?>
-<?php include "Class/HelperClass/QueryString.php"; ?>
+<?php include "Config/Config.php"; ?>
+<?php include "Class/Category.php"; ?>
+<?php include 'Class/DatabaseClass/Database.php'; ?>
 <?php include "Components/header.php" ?>
 <div class="container-fluid" id="InsertPostHeader">
     <div class="row">
@@ -13,24 +12,25 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <?php if (isset($ErrorArray)): ?>
-                <div class="alert alert-danger" role="alert">
-                    <ul>
-                        <?php foreach ($ErrorArray as $Err): ?>
-                            <li><?php echo $Err ?></li>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
-            <?php endif; ?>
-            <?php if (isset($SuccessArray)): ?>
-                <div class="alert alert-danger" role="alert">
-                    <ul>
-                        <?php foreach ($SuccessArray as $Suss): ?>
-                            <li><?php echo $Suss ?></li>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
-            <?php endif; ?>
+            <?php if($_GET):?>
+            <?php if(!isset($_GET['Inserted'])):?>
+                    <div class="alert alert-danger" role="alert">
+                        <ul>
+                            <?php foreach ($_GET as $Message):?>
+                                <li><?php echo $Message?></li>
+                            <?php endforeach;?>
+                        </ul>
+                    </div>
+                <?php else:?>
+                    <div class="alert alert-primary" role="alert">
+                        <ul>
+                            <?php foreach ($_GET as $Message):?>
+                                <li><?php echo $Message?></li>
+                            <?php endforeach;?>
+                        </ul>
+                    </div>
+            <?php endif;?>
+            <?php endif;?>
         </div>
     </div>
 
@@ -56,9 +56,9 @@
             <div class="col-sm-10">
                 <select id="Category" class="form-select" name='Category[]' multiple size="5">
                     <option value="-1" selected>Please Choose a Category</option>
-                    <?php $conncetion = new Database(host,username,password,Database)?>
-                    <?php $Category = new Category($conncetion);?>
-                    <?php $Category->SetCategoryDropdown()?>
+                    <?php $conncetion = new Database(host, username, password, Database) ?>
+                    <?php $Category = new Category($conncetion); ?>
+                    <?php $Category->SetCategoryDropdown() ?>
                 </select>
 
             </div>

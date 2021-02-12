@@ -21,5 +21,6 @@
 //QueryString::setQueryString(["name"=>'mina','age'=>'21','otherData'=>[1,2]]);
 //echo QueryString::getUrl();
 
+?>
 
 
