@@ -11,7 +11,7 @@ if(isset($_POST['insert'])) {
     $Content = trim($_POST['Content']);
     $author = $_POST['Author'];
     $Querystring = [];
-    if (empty($Title) || empty($SEO) || empty($Content) || empty($author) && $Category[0]== '-1')
+    if (empty($Title) || empty($SEO) || empty($Content) || empty($author))
     {
         $Querystring['EmptyFields'] = "please insert the empty values,";
         $Querystring['EmptyCategory'] = "please Select Category";

@@ -1,11 +1,7 @@
-<?php
-include "Config/Config.php";
-include "Class/Category.php";
-include 'Class/DatabaseClass/Database.php';
-include "Class/HelperClass/QueryString.php";
-$URI  = "http://". $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-var_dump(parse_url($URI));
-?>
+<?php include "Config/Config.php";?>
+<?php include "Class/Category.php";?>
+<?php include 'Class/DatabaseClass/Database.php';?>
+<?php include "Class/HelperClass/QueryString.php"; ?>
 <?php include "Components/header.php" ?>
 <div class="container-fluid" id="InsertPostHeader">
     <div class="row">
