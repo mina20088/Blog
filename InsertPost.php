@@ -2,6 +2,7 @@
 <?php include "Class/Category.php"; ?>
 <?php include 'Class/DatabaseClass/Database.php'; ?>
 <?php include "Components/header.php" ?>
+
 <div class="container-fluid" id="InsertPostHeader">
     <div class="row">
         <div class="col-12">
@@ -9,32 +10,7 @@
         </div>
     </div>
 </div>
-<div class="container">
-    <div class="row">
-        <div class="col-12">
-            <?php if($_GET):?>
-            <?php if(!isset($_GET['Inserted'])):?>
-                    <div class="alert alert-danger" role="alert">
-                        <ul>
-                            <?php foreach ($_GET as $Message):?>
-                                <li><?php echo $Message?></li>
-                            <?php endforeach;?>
-                        </ul>
-                    </div>
-                <?php else:?>
-                    <div class="alert alert-primary" role="alert">
-                        <ul>
-                            <?php foreach ($_GET as $Message):?>
-                                <li><?php echo $Message?></li>
-                            <?php endforeach;?>
-                        </ul>
-                    </div>
-            <?php endif;?>
-            <?php endif;?>
-        </div>
-    </div>
-
-</div>
+<?php include "Components/Messages.php";?>
 <div class="container mt-5">
     <form action="Admin/insert.php" method="post">
         <input type="hidden" name="Author" value="1">
@@ -47,8 +23,7 @@
         <div class="row mb-3">
             <label for="SEO-Title" class="col-sm-2 col-form-label" style="font-weight: bold">SEO-Title</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="SEO-Title" name="SEO-Title" value=""
-                       placeholder="SEO-Title">
+                <input type="text" class="form-control" id="SEO-Title" name="SEO-Title" value="" placeholder="SEO-Title">
             </div>
         </div>
         <div class="row mb-3">

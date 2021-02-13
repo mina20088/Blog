@@ -3,30 +3,46 @@ include "../Class/DatabaseClass/Database.php";
 include "../Class/Posts.php";
 include "../Config/Config.php";
 error_reporting(-1);
-if(isset($_POST['insert'])) {
+if(isset($_POST['insert']))
+{
     $Title = $_POST['Title'];
     $SEO = $_POST['SEO-Title'];
     $Category = $_POST['Category'];
     $Content = trim($_POST['Content']);
     $author = $_POST['Author'];
     $Querystring = "";
+
     if ((empty($Title) && empty($SEO) && empty($Content) && empty($author)) && $Category[0] == "-1" )
     {
-        $Querystring .= "EmptyFields=Please Fill Empty Fields" . "&CategoryEmpty = Please Select A Category";
+        $Querystring .= "EmptyTitle=Title Is Mandatory&EmptySEO=SEO Is Mandatory&EmptyContent=Content Is Mandatory&EmptyAuthor=Author Is Mandatory&EmptyCategory=Please choose Category";
     }
-    elseif(empty($Title) && empty($SEO) && empty($Content) && empty($author)){
-        $Querystring .= "EmptyFields=Please Fill Empty Fields";
-    }
-    elseif (empty($Title) || empty($SEO) || empty($Content) || empty($author)){
-        $Querystring .= "&EmptyFields=Please Fill Empty Fields";}
-    elseif ($Category[0] == "-1")
+    elseif(empty($Title) && empty($SEO) && empty($Content) && empty($author))
     {
-        $Querystring .= "CategoryEmpty = Please Select A Category";
+        $Querystring .= "EmptyTitle=Title Is Mandatory&EmptySEO=SEO Is Mandatory&EmptyContent=Content Is Mandatory&EmptyAuthor=Author Is Mindator";
+    }
+    elseif (empty($Title) || empty($SEO) || empty($Content) || empty($author))
+    {
+        if(empty($Title))
+        {
+            $Querystring .= "EmptyTitle=Title Is Mandatory";
+        }
+        if(empty($SEO))
+        {
+            $Querystring .= "&EmptySEO=SEO Is Mandatory";
+        }
+        if(empty($Content))
+        {
+            $Querystring .= "&EmptyContent=Content Is Mandatory";
+        }
+        if(empty($author)){
+            $Querystring .= "&Author=Author Is Mandatory";
+        }
     }
     else {
         $Connection = new Database(host, username, password, Database);
         $Post = new Posts($Connection);
-        $Querystring['inserted'] = $Post->insertPost('ssss', $Title, $SEO, $Content, $author,$Category);
+        $Post->insertPost('ssss', $Title, $SEO, $Content, $author,$Category);
+        $Querystring .= "Inserted=Row Inserted";
 
     }
     if(isset($Querystring))
